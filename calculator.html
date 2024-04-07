@@ -1,0 +1,193 @@
+<html>
+<head>
+<script>
+var switching = "first";
+var input = 0;
+var numeric = "";
+var total;
+var sebelah="";
+
+{
+	function data(number){
+		input = sebelah + number;
+		if(switching == "first")
+		{
+			document.getElementById("input1").value = input;
+			resetColour();
+			document.getElementById("input1").style.background = "yellow";
+		}	
+		else if(switching == "second")
+		{
+			document.getElementById("input2").value = input;
+			resetColour();
+			document.getElementById("input2").style.background = "yellow";
+		}
+		sebelah = input;		
+	}
+
+	function bodmas(value){
+		numeric = value;
+		document.getElementById("numeric").value = numeric;
+		resetColour();
+		document.getElementById("numeric").style.background = "yellow";
+		switching = "second";
+		sebelah = "";
+	}
+
+	function switchPlace(){
+		sebelah = "";
+		if(switching == "first")
+		{
+			switching = "second";
+			resetColour();
+			document.getElementById("input2").style.background = "yellow";
+		}
+		else if(switching == "second")
+		{
+			switching = "first";
+			resetColour();
+			document.getElementById("input1").style.background = "yellow";
+		}
+	}
+
+	function calculate(){
+		var data1 = parseInt(document.getElementById("input1").value);
+		var data2 = parseInt(document.getElementById("input2").value);
+		
+		if(numeric == "+")
+			total =  data1 + data2;
+		else if(numeric == "-")
+			total =  data1 - data2;
+		else if(numeric == "*")
+			total =  data1 * data2;
+		else if(numeric == "/")
+			total =  data1 / data2;
+
+		document.getElementById("answer").value = total;
+
+		resetColour();
+		document.getElementById("answer").style.background = "yellow";
+	}
+
+	function deleteInput(){
+		if(switching == "first")
+			document.getElementById("input1").value = "";
+		else if(switching == "second")
+			document.getElementById("input2").value = "";
+		sebelah = "";
+	}
+
+	function clearAll() {
+		sebelah = "";
+		switching = "first";
+
+		document.getElementById("input1").value = "";
+		document.getElementById("input2").value = "";
+		document.getElementById("answer").value = "";
+
+		resetColour();
+	}
+
+
+
+
+	function resetColour(){
+		document.getElementById("input1").style.background = "white";
+		document.getElementById("input2").style.background = "white";
+		document.getElementById("answer").style.background = "white";
+		document.getElementById("numeric").style.background = "white";
+	}
+}
+
+</script>
+<style>
+.header {height: 75px; background-color: lightcoral;}
+.middle {height: 200px; background-color: seagreen;}
+.bottom { height: 400px; background-color: blueviolet;}
+.header,.middle,.bottom {border:4px solid; border-width: thick; width: 700px; margin-left: 410px}
+
+
+.header h1
+{
+	text-align: center;
+	font-size: 35px; 
+	margin-top: 20px;
+}
+.middle input
+{
+	border:1px solid;
+    border-width: thick;
+	margin-top: 35px;
+	margin-left: 50px;
+
+	text-align: center;
+	font-size: 25px;
+	width: 100px;
+	height: 50px;
+}
+.middle input:focus {background-color: yellow;}
+.bottom button:hover {background-color: lightblue;}
+.bottom h2 {margin-left: 225px;}
+.bottom table {margin-left: 150px; margin-top: 10px;}
+.bottom button
+{
+	font-size: 35px;
+	width: 75px;
+	height: 75px;
+}
+</style>
+</head>
+<body style='background-color: #f0f0f0'>
+
+	<div class="select">
+    	<a style="top: 140px;" href="mainMenu.html" id="linkMenu"> </a>
+    	<a style="top: 240px;" href="guessBomb.html" id="linkBomb"> </a>
+    	<a style="top: 340px;" href="whackMole.html" id="linkWhack"> </a>
+    	<a style="top: 440px;" href="#" id="contact"><b> </b></a>
+  	</div>
+
+	<div class="header">
+		<h1> Calculator </h1>
+	</div>
+
+	<div class="middle">
+		<input id="input1" type="text" style="margin-left: 140px;">
+		<input id="numeric" type="text" readonly>
+		<input id="input2" type="text"><br>
+		<input id="answer" type="text" style="width: 220px; margin-left: 236px;" readonly>
+	</div>
+	
+	<div class="bottom">
+		<h2> Input your answer here </h2>
+		<table>
+			<tr>
+				<td><button onclick="data('7')"> 7 </button></td>
+				<td><button onclick="data('8')"> 8 </button></td>
+				<td><button onclick="data('9')"> 9 </button></td>
+				<td><button onclick="bodmas('/')"> / </button></td>
+				<td><button onclick="deleteInput()" style="font-size: 20px;"> delete </button></td>
+			</tr>
+			<tr>
+				<td><button onclick="data('4')"> 4 </button></td>
+				<td><button onclick="data('5')"> 5 </button></td>
+				<td><button onclick="data('6')"> 6 </button></td>
+				<td><button onclick="bodmas('*')"> * </button></td>
+				<td><button onclick="clearAll()" style="font-size: 20px;"> clear </button></td>
+			</tr>
+			<tr>
+				<td><button onclick="data('1')"> 1 </button></td>
+				<td><button onclick="data('2')"> 2 </button></td>
+				<td><button onclick="data('3')"> 3 </button></td>
+				<td><button onclick="bodmas('-')"> - </button></td>
+				<td rowspan="2"><button style="font-size: 20px; height: 153px;" onclick="switchPlace()"> Switch </button></td>
+			</tr>
+			<tr>
+				<td><button onclick="data('.')"> . </button></td>
+				<td><button onclick="data('0')"> 0 </button></td>
+				<td><button onclick="calculate()"> = </button></td>
+				<td><button onclick="bodmas('+')"> + </button></td>
+			</tr>
+		</table>
+	</div>
+</body>
+</html>
